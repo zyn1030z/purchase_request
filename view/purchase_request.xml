@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase_request_view_tree" model="ir.ui.view">
+            <field name="name">purchase_request_view_tree</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <tree string="purchase_request_tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="purchase_request_view_form" model="ir.ui.view">
+            <field name="name">purchase_request_view_form</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <form string="purchase_request_form">
+                    <header>
+                        <button string="Gửi duyệt" type="object"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,sent,to approve,done,cancel"/>
+                    </header>
+                    <sheet>
+                        <div>
+                            <h1>
+<!--                                <field name="name" readonly="1"/>-->
+                                <field name="name" readonly="1"/>
+                                <field name="name" readonly="2"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="requested_by" widget="res_partner_many2one"
+                                       placeholder="Name, TIN, Email, or Reference"/>
+                                <field name="department"/>
+                                <field name="requested_by"/>
+                                <field name="cost_total"/>
+                            </group>
+                            <group>
+                                <field name="approved_date"/>
+                                <field name="due_date"/>
+                                <field name="creation_date"/>
+                                <field name="company"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <tree>
+                                <field name="company"/>
+                            </tree>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="purchase_request_action" model="ir.actions.act_window">
+            <field name="name">Purchase request action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="purchase_root"
+                  name="Purchase menu"
+                  sequence="10"/>
+        <menuitem id="purchase_categ" name="purchase request" parent="purchase_root" action="purchase_request_action"/>
+    </data>
+</odoo>
